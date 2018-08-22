@@ -406,6 +406,8 @@ autocmd FileType java set tags+=D:\tools\java\tags
  
 "设置tags  
 set tags=tags  
+set tags+=./tags
+set tags+=/usr/include/c++/tags
 "set autochdir 
  
  
@@ -416,7 +418,7 @@ set tags=tags
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
  
 "默认打开Taglist 
-let Tlist_Auto_Open=1 
+let Tlist_Auto_Open=0 
 """""""""""""""""""""""""""""" 
 " Tag list (ctags) 
  
@@ -436,4 +438,26 @@ let g:miniBufExplMapWindowNavArrows = 1
  
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
+let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
+"-- omnicppcomplete setting --
+" 按下F3自动补全代码，注意该映射语句后不能有其他字符，包括tab；否则按下F3会自动补全一些乱码
+imap <Tab> <C-X><C-O>
+" 按下F2根据头文件内关键字补全
+imap <F2> <C-X><C-I>
+set completeopt=menu,menuone " 关掉智能补全时的预览窗口
+let OmniCpp_MayCompleteDot = 1 " autocomplete with .
+let OmniCpp_MayCompleteArrow = 1 " autocomplete with ->
+let OmniCpp_MayCompleteScope = 1 " autocomplete with ::
+let OmniCpp_SelectFirstItem = 2 " select first item (but don't insert)
+let OmniCpp_NamespaceSearch = 2 " search namespaces in this and included files
+let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype in popup window
+let OmniCpp_GlobalScopeSearch=1 " enable the global scope search
+let OmniCpp_DisplayMode=1 " Class scope completion mode: always show all members
+"let OmniCpp_DefaultNamespaces=["std"]
+let OmniCpp_ShowScopeInAbbr=1 " show scope in abbreviation and remove the last column
+let OmniCpp_ShowAccess=1
 
+"-- WinManager setting --
+let g:winManagerWindowLayout='FileExplorer|TagList' " 设置我们要管理的插件
+"let g:persistentBehaviour=0 " 如果所有编辑文件都关闭了，退出vim
+"nmap wm :WMToggle<cr>
