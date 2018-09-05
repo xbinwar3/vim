@@ -56,7 +56,7 @@ set fileencoding=utf-8
 """""新文件标题""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "新建.c,.h,.sh,.java文件，自动插入文件头 
  
-autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java exec ":call SetTitle()" 
+autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java,*.php exec ":call SetTitle()" 
  
 ""定义函数SetTitle，自动插入文件头 
  
@@ -113,6 +113,12 @@ func SetTitle()
         call append(line(".")+6, "#include<stdio.h>")
  
         call append(line(".")+7, "")
+ 
+    endif
+    if &filetype == 'php'
+        call setline(1, "<?php")
+        call append(line("."), "/*************************************************************************") 
+ 
  
     endif
  
@@ -441,7 +447,7 @@ let g:miniBufExplModSelTarget = 1
 let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
 "-- omnicppcomplete setting --
 " 按下F3自动补全代码，注意该映射语句后不能有其他字符，包括tab；否则按下F3会自动补全一些乱码
-imap <Tab> <C-X><C-O>
+imap <F3> <C-X><C-O>
 " 按下F2根据头文件内关键字补全
 imap <F2> <C-X><C-I>
 set completeopt=menu,menuone " 关掉智能补全时的预览窗口
@@ -461,3 +467,14 @@ let OmniCpp_ShowAccess=1
 let g:winManagerWindowLayout='FileExplorer|TagList' " 设置我们要管理的插件
 "let g:persistentBehaviour=0 " 如果所有编辑文件都关闭了，退出vim
 "nmap wm :WMToggle<cr>
+"
+"
+"
+au FileType php call PHPFuncList()
+function PHPFuncList()
+
+set dictionary-=/etc/vim/php_funclist.txt dictionary+=/etc/vim/php_funclist.txt
+
+set complete-=k complete+=k
+
+endfunction
