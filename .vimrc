@@ -405,15 +405,14 @@ let Tlist_Exist_OnlyWindow = 1  " 如果只有一个buffer，kill窗口也kill�
 let Tlist_File_Fold_Auto_Close = 0  " 不要关闭其他文件的tags  
  
 let Tlist_Enable_Fold_Column = 0    " 不要显示折叠树  
-autocmd FileType java set tags+=D:\tools\java\tags  
-"autocmd FileType h,cpp,cc,c set tags+=D:\tools\cpp\tags  
+"autocmd FileType java set tags+=D:\tools\java\tags  
+""autocmd FileType h,cpp,cc,c set tags+=/home/hao/tags
  
 "let Tlist_Show_One_File=1            "不同时显示多个文件的tag，只显示当前文件的
  
 "设置tags  
-set tags=tags  
-set tags+=./tags
-set tags+=/usr/include/c++/tags
+""set tags=tags  
+""set tags+=./tags
 "set autochdir 
  
  
@@ -424,7 +423,7 @@ set tags+=/usr/include/c++/tags
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
  
 "默认打开Taglist 
-let Tlist_Auto_Open=0 
+let Tlist_Auto_Open=1
 """""""""""""""""""""""""""""" 
 " Tag list (ctags) 
  
@@ -470,6 +469,7 @@ let g:winManagerWindowLayout='FileExplorer|TagList' " 设置我们要管理的�
 "
 "
 "
+autocmd FileType php map :!php -l %
 au FileType php call PHPFuncList()
 function PHPFuncList()
 
@@ -477,4 +477,10 @@ set dictionary-=/etc/vim/php_funclist.txt dictionary+=/etc/vim/php_funclist.txt
 
 set complete-=k complete+=k
 
+endfunction
+
+au FileType c call CFuncList()
+function CFuncList()
+set dictionary-=/home/hao/tags dictionary+=/home/hao/tags
+set complete-=k complete+=k
 endfunction
